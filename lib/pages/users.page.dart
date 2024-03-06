@@ -104,9 +104,16 @@ class _UsersPageState extends State<UsersPage> {
             ),
             Expanded(
                 child: ListView.separated(
-                  separatorBuilder: (context,index)=> Divider(
-                    height: 1,color: Colors.blueGrey
-                  ),
+                    separatorBuilder: (context, index) => Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.blue.withOpacity(0.1), Colors.blue.withOpacity(0.4), Colors.blue.withOpacity(0.1)],
+
+                        ),
+                      ),
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                    ),
                     controller: scrollController,
                     itemCount: items.length,
                     itemBuilder: (context,index){

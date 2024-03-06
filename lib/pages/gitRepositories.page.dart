@@ -39,11 +39,26 @@ class _GitRepositoriesState extends State<GitRepositories> {
 
       body: Center(
         child:ListView.separated(
-            itemBuilder:(context,index)=>ListTile(
-              title: Text("${repos[index]['name']}"),
+
+          itemBuilder:(context,index)=>ListTile(
+              title: Row(children: [
+                Icon(Icons.folder,color: Colors.blueAccent,),
+                SizedBox(width: 20,),
+                Text("${repos[index]['name']}",style: TextStyle(fontWeight: FontWeight.bold),),]
+                 )
 
             ) ,
-            separatorBuilder: (context,index)=>Divider(height: 2,color: Colors.blueGrey,),
+
+          separatorBuilder: (context, index) => Container(
+            height: 1,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.blue.withOpacity(0.1), Colors.blue.withOpacity(0.4), Colors.blue.withOpacity(0.1)],
+
+              ),
+            ),
+            margin: EdgeInsets.symmetric(horizontal: 20),
+          ),
             itemCount: repos == null?0:repos.length,
         )
       ),
