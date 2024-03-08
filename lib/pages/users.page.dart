@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:git_hub_users_app/pages/gitRepositories.page.dart';
+import 'package:git_hub_users_app/pages/profile.page.dart';
 import 'package:http/http.dart' as http;
 class UsersPage extends StatefulWidget {
   const UsersPage({super.key});
@@ -119,7 +120,11 @@ class _UsersPageState extends State<UsersPage> {
                     itemBuilder: (context,index){
                       return ListTile(
                         onTap: (){
-                          Navigator.push(context,MaterialPageRoute(builder: (context)=>GitRepositories(login : this.items[index]['login'],avatarUrl: this.items[index]['avatar_url'],)) );
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=>
+                              // GitRepositories(login : this.items[index]['login'],avatarUrl: this.items[index]['avatar_url'],)
+                            Profil(),
+                          )
+                          );
                         },
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

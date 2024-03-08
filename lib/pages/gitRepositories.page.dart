@@ -32,33 +32,50 @@ class _GitRepositoriesState extends State<GitRepositories> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Repositories ${this.widget.login}"),
+      appBar: AppBar(title: Text("Repositories"),
       actions: [
-        CircleAvatar(backgroundImage: NetworkImage(widget.avatarUrl),)
+        Text("${this.widget.login}",style: TextStyle(fontSize: 20),),
+        SizedBox(width: 10,height: 10,),
+        CircleAvatar(backgroundImage: NetworkImage(widget.avatarUrl),),
+        SizedBox(width: 10,height: 10,),
       ],),
 
       body: Center(
-        child:ListView.separated(
+        child:ListView.builder(
 
-          itemBuilder:(context,index)=>ListTile(
-              title: Row(children: [
-                Icon(Icons.folder,color: Colors.blueAccent,),
-                SizedBox(width: 20,),
-                Text("${repos[index]['name']}",style: TextStyle(fontWeight: FontWeight.bold),),]
-                 )
-
-            ) ,
-
-          separatorBuilder: (context, index) => Container(
-            height: 1,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.blue.withOpacity(0.1), Colors.blue.withOpacity(0.4), Colors.blue.withOpacity(0.1)],
-
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Card(
+                clipBehavior: Clip.hardEdge,
+                margin: EdgeInsets.only(top: 0),
+                child: InkWell(
+                  splashColor: Colors.blueAccent,
+                  onTap: () {
+                    debugPrint('Card tapped.');
+                  },
+                  child: SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 0.0, left: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                         Row(children: [Icon(Icons.folder),
+                           SizedBox(width: 10),
+                           Text("${repos[index]['name']}"),
+                         ]),
+                          // Icon(this.repos[index]['visibility']=="private"?Icons.lock:Icons.lock_open,color: Colors.green,),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            margin: EdgeInsets.symmetric(horizontal: 20),
-          ),
+            );
+          },
+
+
             itemCount: repos == null?0:repos.length,
         )
       ),
